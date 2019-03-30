@@ -31,6 +31,7 @@ class ViewController: UIViewController {
     
     
     var timer: Timer?
+    var forcefeed = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +60,12 @@ class ViewController: UIViewController {
                 }
             })
         })
+//        for button in controlButton{
+//            button.layer.cornerRadius = 8.0
+//        }
+//        FeedButton.layer.cornerRadius = 8.0
+//        HistoryButton.layer.cornerRadius = 8.0
+        
     }
     override func viewDidDisappear(_ animated: Bool) {
         if timer != nil{ timer?.invalidate() }
@@ -66,30 +73,65 @@ class ViewController: UIViewController {
     @IBOutlet weak var catImage: CatImageView!
     
     @IBAction func pressLow(_ sender: UIButton) {
-        if !tellFirebase(for: feedMass.low){
-            //unsuccessfull
-            
-            
+        if forcefeed{
+            feedCat(for: feedMass.low)
+            FeedButton.layer.borderWidth = 0
         }
-        
+        else{
+            if !tellFirebase(for: feedMass.low){
+                //unsuccessful
+                
+                
+            }
+        }
         
         
     }
     
+    @IBOutlet var controlButton: [UIButton]!
+    @IBOutlet weak var FeedButton: UIButton!
+    @IBOutlet weak var HistoryButton: UIButton!
+    
     @IBAction func pressMedium(_ sender: UIButton) {
-        if !tellFirebase(for: feedMass.medium){
-            //unsuccessfull
-            
-            
+        if forcefeed{
+            feedCat(for: feedMass.medium)
+            FeedButton.layer.borderWidth = 0
+        }
+        else{
+            if !tellFirebase(for: feedMass.medium){
+                //unsuccessful
+                
+                
+            }
         }
     }
     
     @IBAction func pressHigh(_ sender: UIButton) {
-        if !tellFirebase(for: feedMass.high){
-            //unsuccessfull
-            
-            
+        if forcefeed{
+            feedCat(for: feedMass.high)
+            FeedButton.layer.borderWidth = 0
         }
+        else{
+            if !tellFirebase(for: feedMass.high){
+                //unsuccessful
+                
+                
+            }
+
+        }
+    }
+    
+    @IBAction func ForceFeed(_ sender: UIButton) {
+        if !forcefeed{
+            forcefeed = true
+            FeedButton.layer.borderWidth = 4.0
+            FeedButton.layer.borderColor = UIColor.black.cgColor
+        }
+        else{
+            forcefeed = false
+            FeedButton.layer.borderWidth = 0
+        }
+        
     }
     
     func tellFirebase(for mass: feedMass) -> Bool{
@@ -136,6 +178,57 @@ class CatImageView: UIView{
     }
     
 }
+class Cat1TableViewController: UITableViewController {
+    var masstime: [(Int)] {
+        var ret = [(Int)]()
+        for _ in 1...7{
+            ret.append((0))
+        }
+        return ret
+    }
+    var mtbool = [false,true,true,false,false,false,false]
+    
+    @IBOutlet weak var mass1: UILabel!
+    @IBOutlet weak var mass2: UILabel!
+    @IBOutlet weak var mass3: UILabel!
+    @IBOutlet weak var mass4: UILabel!
+    @IBOutlet weak var mass5: UILabel!
+    @IBOutlet weak var mass6: UILabel!
+    @IBOutlet weak var mass7: UILabel!
+    
+//    func setMass(){
+//        for mtindex in mtbool.indices{
+//            if mtbool[mtindex]{
+//                switch mtindex{
+//                case 0:
+//                    mass1.text = "Mass: \(masstime[mtindex])"
+//                case 1:
+//                    mass1.text = "Mass: \(masstime[mtindex])"
+//                case 2:
+//                    mass1.text = "Mass: \(masstime[mtindex])"
+//                case 3:
+//                    mass1.text = "Mass: \(masstime[mtindex])"
+//                case 4:
+//                    mass1.text = "Mass: \(masstime[mtindex])"
+//                case 5:
+//                    mass1.text = "Mass: \(masstime[mtindex])"
+//                case 6:
+//                    mass1.text = "Mass: \(masstime[mtindex])"
+//                default: break
+//
+//
+//                }
+//            }
+//        }
+//    }
+//
+    
+
+    
+}
+
+
+
 
 enum feedMass{
     case low
