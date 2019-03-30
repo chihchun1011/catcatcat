@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E2060F15224F58A60011DA71 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2060F14224F58A60011DA71 /* DataService.swift */; };
-		E2060F17224F5E150011DA71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2060F16224F5E150011DA71 /* GoogleService-Info.plist */; };
+		E2060F19224F9E930011DA71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2060F18224F9E930011DA71 /* GoogleService-Info.plist */; };
 		E2DA5E80224F32EB00CE0741 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA5E7F224F32EB00CE0741 /* AppDelegate.swift */; };
 		E2DA5E82224F32EB00CE0741 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA5E81224F32EB00CE0741 /* ViewController.swift */; };
 		E2DA5E85224F32EB00CE0741 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2DA5E83224F32EB00CE0741 /* Main.storyboard */; };
@@ -21,7 +21,7 @@
 /* Begin PBXFileReference section */
 		C375D19D04E72C1AC5243F61 /* Pods-catcatcat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-catcatcat.debug.xcconfig"; path = "Target Support Files/Pods-catcatcat/Pods-catcatcat.debug.xcconfig"; sourceTree = "<group>"; };
 		E2060F14224F58A60011DA71 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		E2060F16224F5E150011DA71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E2060F18224F9E930011DA71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2DA5E7C224F32EB00CE0741 /* catcatcat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = catcatcat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2DA5E7F224F32EB00CE0741 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2DA5E81224F32EB00CE0741 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 				E2DA5E83224F32EB00CE0741 /* Main.storyboard */,
 				E2DA5E86224F32ED00CE0741 /* Assets.xcassets */,
 				E2DA5E88224F32ED00CE0741 /* LaunchScreen.storyboard */,
-				E2060F16224F5E150011DA71 /* GoogleService-Info.plist */,
+				E2060F18224F9E930011DA71 /* GoogleService-Info.plist */,
 				E2DA5E8B224F32ED00CE0741 /* Info.plist */,
 			);
 			path = catcatcat;
@@ -131,6 +131,11 @@
 				TargetAttributes = {
 					E2DA5E7B224F32EB00CE0741 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -158,7 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2DA5E8A224F32ED00CE0741 /* LaunchScreen.storyboard in Resources */,
-				E2060F17224F5E150011DA71 /* GoogleService-Info.plist in Resources */,
+				E2060F19224F9E930011DA71 /* GoogleService-Info.plist in Resources */,
 				E2DA5E87224F32ED00CE0741 /* Assets.xcassets in Resources */,
 				E2DA5E85224F32EB00CE0741 /* Main.storyboard in Resources */,
 			);

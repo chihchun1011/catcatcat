@@ -23,7 +23,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         ref = Database.database().reference()
-        ref.child("cat/cat4").setValue(30)
+        
+        
+        //for set data
+//        ref.child("data/cat1").setValue(50)
+        
+        //for get data
+//        ref.child("data/cat1").observe(DataEventType.value, with:{ (snapchat) in
+//            let data = snapchat.value!
+//            print(data)
+//        })
     }
 
     
