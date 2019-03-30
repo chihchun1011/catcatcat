@@ -13,10 +13,14 @@ class ViewController: UIViewController {
     
     //datas
     let cats: [Int: String] = [0: "cat1",1:"cat2", 2:"cat3" ]
-    var whichcat: Int? = nil {didSet{
-            catImage.cat = cats[whichcat!]!
-        }}
-    var feedmass: feedMass?
+    var whichcat: Int? = nil {
+        didSet{
+            if whichcat != nil{
+                catImage.cat = cats[whichcat!]!
+            }
+        }
+    }
+
     var hadRequestedFromCat: Bool = false
     
     
@@ -41,8 +45,6 @@ class ViewController: UIViewController {
                 let data = snapchat.value! as? Int
 //                print(data)
                 
-                
-                
                 if data == -1 {
                     // do nothing
                 }
@@ -55,19 +57,8 @@ class ViewController: UIViewController {
                     self.ref.child("cache/requestFromDevice").setValue(-1)
                     
                 }
-                
             })
-
         })
-        
-        //for setting data
-//        ref.child("data/cat1").setValue(50)
-        
-        //for getting data
-//        ref.child("data/cat1").observe(DataEventType.value, with:{ (snapchat) in
-//            let data = snapchat.value!
-//            print(data)
-//        })
     }
     override func viewDidDisappear(_ animated: Bool) {
         if timer != nil{ timer?.invalidate() }
@@ -75,116 +66,59 @@ class ViewController: UIViewController {
     @IBOutlet weak var catImage: CatImageView!
     
     @IBAction func pressLow(_ sender: UIButton) {
-        if feedmass == nil{
-
-            feedmass = feedMass.low
-            tellFirebase()
-        }
-        else{
+        if !tellFirebase(for: feedMass.low){
+            //unsuccessfull
+            
             
         }
+        
+        
+        
     }
     
     @IBAction func pressMedium(_ sender: UIButton) {
-        if feedmass == nil{
+        if !tellFirebase(for: feedMass.medium){
+            //unsuccessfull
             
-            feedmass = feedMass.medium
-            tellFirebase()
-        }
-        else{
             
         }
     }
     
     @IBAction func pressHigh(_ sender: UIButton) {
-        if feedmass == nil{
+        if !tellFirebase(for: feedMass.high){
+            //unsuccessfull
             
-            feedmass = feedMass.high
-            tellFirebase()
+            
+        }
+    }
+    
+    func tellFirebase(for mass: feedMass) -> Bool{
+        if hadRequestedFromCat {
+            ref.child("cache/messageFromApps").setValue(mass.num)
+            hadRequestedFromCat = false
+            return true
         }
         else{
-            
+            return false
         }
-    }
-    func tellFirebase(){
-        assert(feedmass != nil)
-        
-        
-        
         
     }
-    func feedCat(){
-        
+    func feedCat(for mass: feedMass){
+        ref.child("cache/messageFromApps").setValue(mass.num)
         
         
     }
-    func reset(){
-        feedmass = nil
-        whichcat = nil
-    }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-////        var timer: Timer?
-////        testqueue(at: ref)
-////        testworkitem(at: ref)
-//    }
-    
-
 }
-//func testworkitem(at ref: DatabaseReference){
-//    let workitem = DispatchWorkItem {
+    
+//for setting data
+//        ref.child("data/cat1").setValue(50)
+
+//for getting data
 //        ref.child("data/cat1").observe(DataEventType.value, with:{ (snapchat) in
 //            let data = snapchat.value!
 //            print(data)
 //        })
-//    }
-//    let timedelay: DispatchTimeInterval = .seconds(2)
-//    let queue = DispatchQueue(label: "com.appcoda.queue1", qos: .userInitiated)
-//    while true{
-//        queue.asyncAfter(deadline: .now()+timedelay, execute: workitem)
-////        workitem.notify(queue: DispatchQueue.main){
-////            print("haha")
-////        }
-//    }
-//
-//}
-
-
-
-//func testqueue(at ref: DatabaseReference){
-////    let queue1 = DispatchQueue(label: "com.appcoda.queue1", qos: DispatchQoS.userInitiated)
-//    let queue2 = DispatchQueue(label: "com.appcoda.queue2", qos: DispatchQoS.background)
-////
-////    queue1.async {
-////        for i in 1...10{
-////            print("• ",i)
-////        }
-////    }
-//
-//    var timer: Timer?
-//    queue2.async {
-////        while true {
-//        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: {_ in
-//
-//            print(Date())
-//            ref.child("data/cat1").observe(DataEventType.value, with:{ (snapchat) in
-//                let data = snapchat.value!
-//                print(data)
-//            })
-//
-//        })
-//
-////            let timedelay: DispatchTimeInterval = .seconds(2)
-//
-//
-////        }
-//    }
-//    if (timer != nil) {timer?.invalidate()}
-////
-//}
-
-
+    
 @IBDesignable
 class CatImageView: UIView{
     
@@ -202,7 +136,6 @@ class CatImageView: UIView{
     }
     
 }
-
 
 enum feedMass{
     case low
