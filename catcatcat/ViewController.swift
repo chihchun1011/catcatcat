@@ -12,9 +12,15 @@ import FirebaseDatabase
 class ViewController: UIViewController {
     
     //datas
-    var whichcat: Int?
+    let cats: [Int: String] = [0: "cat1",1:"cat2", 2:"cat3" ]
+    var whichcat: Int? = nil {didSet{
+            catImage.cat = cats[whichcat!]!
+        }}
     var feedmass: feedMass?
     var hadRequestedFromCat: Bool = false
+    
+    
+    
     
     //for connecting
     var ref: DatabaseReference!
@@ -28,12 +34,28 @@ class ViewController: UIViewController {
         ref = Database.database().reference()
         
         
-        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: {_ in
+        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: {_ in
             
-            print(Date())
+//            print(Date())
             self.ref.child("cache/requestFromDevice").observe(DataEventType.value, with:{ (snapchat) in
-                let data = snapchat.value!
-                print(data)
+                let data = snapchat.value! as? Int
+//                print(data)
+                
+                
+                
+                if data == -1 {
+                    // do nothing
+                }
+                else{
+                    //without checking data's validility
+                    self.whichcat = data
+                    self.hadRequestedFromCat = true
+                    
+                    // modify database cache (requestFromDevice) back to initial state (-1)
+                    self.ref.child("cache/requestFromDevice").setValue(-1)
+                    
+                }
+                
             })
 
         })
@@ -47,7 +69,10 @@ class ViewController: UIViewController {
 //            print(data)
 //        })
     }
-
+    override func viewDidDisappear(_ animated: Bool) {
+        if timer != nil{ timer?.invalidate() }
+    }
+    @IBOutlet weak var catImage: CatImageView!
     
     @IBAction func pressLow(_ sender: UIButton) {
         if feedmass == nil{
@@ -105,8 +130,7 @@ class ViewController: UIViewController {
 ////        testworkitem(at: ref)
 //    }
     
-    
-//    let cats: [Int: String] = [0: "a",1:"b", 2:"c" ]
+
 }
 //func testworkitem(at ref: DatabaseReference){
 //    let workitem = DispatchWorkItem {
@@ -178,11 +202,6 @@ class CatImageView: UIView{
     }
     
 }
-//let fetchDataQueue = DispatchQueue(label: "fetchdata", qos: .userInitiated, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil)
-//fetchDataQueue.async {
-//    <#code#>
-//}
-
 
 
 enum feedMass{
