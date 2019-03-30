@@ -13,7 +13,8 @@ class ViewController: UIViewController {
     
     //datas
     var whichcat: Int?
-    var state: State?
+    var feedmass: feedMass?
+    var hadRequestedFromCat: Bool = false
     
     //for connecting
     var ref: DatabaseReference!
@@ -25,10 +26,10 @@ class ViewController: UIViewController {
         ref = Database.database().reference()
         
         
-        //for set data
+        //for setting data
 //        ref.child("data/cat1").setValue(50)
         
-        //for get data
+        //for getting data
 //        ref.child("data/cat1").observe(DataEventType.value, with:{ (snapchat) in
 //            let data = snapchat.value!
 //            print(data)
@@ -37,9 +38,9 @@ class ViewController: UIViewController {
 
     
     @IBAction func pressLow(_ sender: UIButton) {
-        if state == nil{
+        if feedmass == nil{
 
-            state = State.low
+            feedmass = feedMass.low
             tellFirebase()
         }
         else{
@@ -48,9 +49,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func pressMedium(_ sender: UIButton) {
-        if state == nil{
+        if feedmass == nil{
             
-            state = State.medium
+            feedmass = feedMass.medium
             tellFirebase()
         }
         else{
@@ -59,9 +60,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func pressHigh(_ sender: UIButton) {
-        if state == nil{
+        if feedmass == nil{
             
-            state = State.high
+            feedmass = feedMass.high
             tellFirebase()
         }
         else{
@@ -69,16 +70,23 @@ class ViewController: UIViewController {
         }
     }
     func tellFirebase(){
-        assert(state != nil)
+        assert(feedmass != nil)
+        
+        
+        
+        
+    }
+    func feedCat(){
+        
         
         
     }
     func reset(){
-        state = nil
+        feedmass = nil
         whichcat = nil
     }
     
-    let cats: [Int: String] = [0: "a",1:"b", 2:"c" ]
+//    let cats: [Int: String] = [0: "a",1:"b", 2:"c" ]
 }
 @IBDesignable
 class CatImageView: UIView{
@@ -97,7 +105,12 @@ class CatImageView: UIView{
     }
     
 }
-enum State{
+
+
+
+
+
+enum feedMass{
     case low
     case medium
     case high
