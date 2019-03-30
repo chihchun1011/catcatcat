@@ -20,11 +20,23 @@ class ViewController: UIViewController {
     var ref: DatabaseReference!
     
     
+    var timer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         ref = Database.database().reference()
         
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: {_ in
+            
+            print(Date())
+            self.ref.child("cache/requestFromDevice").observe(DataEventType.value, with:{ (snapchat) in
+                let data = snapchat.value!
+                print(data)
+            })
+
+        })
         
         //for setting data
 //        ref.child("data/cat1").setValue(50)
@@ -85,9 +97,70 @@ class ViewController: UIViewController {
         feedmass = nil
         whichcat = nil
     }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+////        var timer: Timer?
+////        testqueue(at: ref)
+////        testworkitem(at: ref)
+//    }
+    
     
 //    let cats: [Int: String] = [0: "a",1:"b", 2:"c" ]
 }
+//func testworkitem(at ref: DatabaseReference){
+//    let workitem = DispatchWorkItem {
+//        ref.child("data/cat1").observe(DataEventType.value, with:{ (snapchat) in
+//            let data = snapchat.value!
+//            print(data)
+//        })
+//    }
+//    let timedelay: DispatchTimeInterval = .seconds(2)
+//    let queue = DispatchQueue(label: "com.appcoda.queue1", qos: .userInitiated)
+//    while true{
+//        queue.asyncAfter(deadline: .now()+timedelay, execute: workitem)
+////        workitem.notify(queue: DispatchQueue.main){
+////            print("haha")
+////        }
+//    }
+//
+//}
+
+
+
+//func testqueue(at ref: DatabaseReference){
+////    let queue1 = DispatchQueue(label: "com.appcoda.queue1", qos: DispatchQoS.userInitiated)
+//    let queue2 = DispatchQueue(label: "com.appcoda.queue2", qos: DispatchQoS.background)
+////
+////    queue1.async {
+////        for i in 1...10{
+////            print("• ",i)
+////        }
+////    }
+//
+//    var timer: Timer?
+//    queue2.async {
+////        while true {
+//        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: {_ in
+//
+//            print(Date())
+//            ref.child("data/cat1").observe(DataEventType.value, with:{ (snapchat) in
+//                let data = snapchat.value!
+//                print(data)
+//            })
+//
+//        })
+//
+////            let timedelay: DispatchTimeInterval = .seconds(2)
+//
+//
+////        }
+//    }
+//    if (timer != nil) {timer?.invalidate()}
+////
+//}
+
+
 @IBDesignable
 class CatImageView: UIView{
     
@@ -105,8 +178,10 @@ class CatImageView: UIView{
     }
     
 }
-
-
+//let fetchDataQueue = DispatchQueue(label: "fetchdata", qos: .userInitiated, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil)
+//fetchDataQueue.async {
+//    <#code#>
+//}
 
 
 
