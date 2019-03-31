@@ -12,7 +12,7 @@ import FirebaseDatabase
 class ViewController: UIViewController {
     
     //datas
-    let cats: [Int: String] = [0: "cat1",1:"cat2", 2:"cat3" ]
+    let cats: [Int: String] = [1: "cat1",2:"cat2", 3:"cat3" ]
     var whichcat: Int? = nil {
         didSet{
             if whichcat != nil{
@@ -178,55 +178,6 @@ class CatImageView: UIView{
     }
     
 }
-class Cat1TableViewController: UITableViewController {
-    var masstime: [(Int)] {
-        var ret = [(Int)]()
-        for _ in 1...7{
-            ret.append((0))
-        }
-        return ret
-    }
-    var mtbool = [false,true,true,false,false,false,false]
-    
-    @IBOutlet weak var mass1: UILabel!
-    @IBOutlet weak var mass2: UILabel!
-    @IBOutlet weak var mass3: UILabel!
-    @IBOutlet weak var mass4: UILabel!
-    @IBOutlet weak var mass5: UILabel!
-    @IBOutlet weak var mass6: UILabel!
-    @IBOutlet weak var mass7: UILabel!
-    
-//    func setMass(){
-//        for mtindex in mtbool.indices{
-//            if mtbool[mtindex]{
-//                switch mtindex{
-//                case 0:
-//                    mass1.text = "Mass: \(masstime[mtindex])"
-//                case 1:
-//                    mass1.text = "Mass: \(masstime[mtindex])"
-//                case 2:
-//                    mass1.text = "Mass: \(masstime[mtindex])"
-//                case 3:
-//                    mass1.text = "Mass: \(masstime[mtindex])"
-//                case 4:
-//                    mass1.text = "Mass: \(masstime[mtindex])"
-//                case 5:
-//                    mass1.text = "Mass: \(masstime[mtindex])"
-//                case 6:
-//                    mass1.text = "Mass: \(masstime[mtindex])"
-//                default: break
-//
-//
-//                }
-//            }
-//        }
-//    }
-//
-    
-
-    
-}
-
 
 
 
@@ -237,9 +188,9 @@ enum feedMass{
     
     var num: Int{
         switch self {
-        case .low:    return 0
-        case .medium: return 1
-        case .high:   return 2
+        case .low:    return 1
+        case .medium: return 2
+        case .high:   return 3
         }
     }
 }
