@@ -125,7 +125,7 @@ class ViewController: UIViewController {
         if !forcefeed{
             forcefeed = true
             FeedButton.layer.borderWidth = 4.0
-            FeedButton.layer.borderColor = UIColor.black.cgColor
+            FeedButton.layer.borderColor = UIColor.white.cgColor
         }
         else{
             forcefeed = false
