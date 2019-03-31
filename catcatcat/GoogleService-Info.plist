@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>17756090289-82anfv048jjb4ju32427e9vc62n6q2al.apps.googleusercontent.com</string>
+	<string>17756090289-vhe6qqulmilkc3rnu778oea4nj906cb5.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.17756090289-82anfv048jjb4ju32427e9vc62n6q2al</string>
+	<string>com.googleusercontent.apps.17756090289-vhe6qqulmilkc3rnu778oea4nj906cb5</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDcp137hPjsmGSecIupftR_NDbS39WgkrY</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>dingyiyi.catcatcat</string>
+	<string>com.dingyiyi.catcatcat</string>
 	<key>PROJECT_ID</key>
 	<string>catcatcat-d877b</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:17756090289:ios:f8f923218a75ad6e</string>
+	<string>1:17756090289:ios:1b90dd8c47483df1</string>
 	<key>DATABASE_URL</key>
 	<string>https://catcatcat-d877b.firebaseio.com</string>
 </dict>
